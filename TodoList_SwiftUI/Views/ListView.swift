@@ -14,6 +14,7 @@ struct ListView: View {
         "This is the third title",
         "This is the fifth title"
     ]
+    
     var body: some View {
         List {
             ForEach(items, id: \.self) { item in
