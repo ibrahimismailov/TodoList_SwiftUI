@@ -8,12 +8,13 @@
 import SwiftUI
 
 struct AddView: View {
+    
     @State var textfieldText: String = ""
     @EnvironmentObject var listViewModel: ListViewModel
     @Environment(\.presentationMode) var presentationMode
     @State var alertTitle: String = ""
     @State var showAlert: Bool = false
-    
+
     var body: some View {
         ScrollView {
             VStack {
@@ -23,7 +24,6 @@ struct AddView: View {
                     .background(Color.white)
                     .cornerRadius(10)
                     .shadow(radius: 5)
-                
                 Button(action: saveButtonPressed, label: {
                     Text("Save".uppercased())
                         .foregroundColor(.white)
@@ -35,19 +35,15 @@ struct AddView: View {
                 })
             }
             .padding(16)
-                
         }
-        
-        .navigationTitle("Add an item ✐")
-        .alert(isPresented: $showAlert, content: getAlert)
-       
+            .navigationTitle("Add an item ✐")
+            .alert(isPresented: $showAlert, content: getAlert)
     }
     func saveButtonPressed() {
         if checkTextFieldText() {
             listViewModel.addItem(title: textfieldText)
             presentationMode.wrappedValue.dismiss()
         }
-  
     }
     func getAlert() -> Alert {
         return Alert(title: Text(alertTitle))
@@ -61,13 +57,11 @@ struct AddView: View {
         return true
     }
 }
-
 struct AddView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             AddView()
         }
         .environmentObject(ListViewModel())
-      
     }
 }

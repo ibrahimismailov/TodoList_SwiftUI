@@ -20,11 +20,9 @@ struct ListRowView: View {
         .padding(.vertical, 8)
     }
 }
-
 struct ListRowView_Previews: PreviewProvider {
     static var item1 = ItemModel(title: "Hi", isCompleted: true)
     static var item2 = ItemModel(title: "Hi how are you", isCompleted: false)
-    
     static var previews: some View {
         Group {
             ListRowView(item: item1)

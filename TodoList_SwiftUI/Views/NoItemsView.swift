@@ -11,9 +11,7 @@ struct NoItemsView: View {
     @State var animate: Bool = false
     var body: some View {
         ScrollView {
-            
             VStack(spacing: 30) {
-                
                 Text("no, items!")
                     .font(.title)
                     .fontWeight(.semibold)
@@ -40,9 +38,8 @@ struct NoItemsView: View {
                     y: animate ? 50 : 10)
             .onAppear(perform: addAnimation)
             .offset( y: animate ? -7 : 0)
-               
         }
-        .frame(maxWidth: .infinity,  maxHeight: .infinity)
+            .frame(maxWidth: .infinity,  maxHeight: .infinity)
     }
     func addAnimation() {
         guard !animate else { return }
@@ -57,13 +54,11 @@ struct NoItemsView: View {
         }
     }
 }
-
 struct NoItemsView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             NoItemsView()
                 .navigationTitle("Todo-List")
         }
-     
     }
 }
