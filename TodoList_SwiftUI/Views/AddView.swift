@@ -9,6 +9,11 @@ import SwiftUI
 
 struct AddView: View {
     @State var textfieldText: String = ""
+    @EnvironmentObject var listViewModel: ListViewModel
+    @Environment(\.presentationMode) var presentationMode
+    @State var alertTitle: String = ""
+    @State var showAlert: Bool = false
+    
     var body: some View {
         ScrollView {
             VStack {
@@ -19,9 +24,7 @@ struct AddView: View {
                     .cornerRadius(10)
                     .shadow(radius: 5)
                 
-                Button(action: {
-                    
-                }, label: {
+                Button(action: saveButtonPressed, label: {
                     Text("Save".uppercased())
                         .foregroundColor(.white)
                         .font(.headline)
@@ -35,8 +38,27 @@ struct AddView: View {
                 
         }
         
-        .navigationTitle("Add an item 👩‍🏫")
+        .navigationTitle("Add an item ✐")
+        .alert(isPresented: $showAlert, content: getAlert)
        
+    }
+    func saveButtonPressed() {
+        if checkTextFieldText() {
+            listViewModel.addItem(title: textfieldText)
+            presentationMode.wrappedValue.dismiss()
+        }
+  
+    }
+    func getAlert() -> Alert {
+        return Alert(title: Text(alertTitle))
+    }
+    func checkTextFieldText() -> Bool {
+        if textfieldText.count < 3 {
+            alertTitle = "items must be minimum three characters😕"
+            showAlert.toggle()
+            return false
+        }
+        return true
     }
 }
 
@@ -45,6 +67,7 @@ struct AddView_Previews: PreviewProvider {
         NavigationView {
             AddView()
         }
+        .environmentObject(ListViewModel())
       
     }
 }
